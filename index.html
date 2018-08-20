@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+
+<script>
+  document.body.onload = () => {
+    google = window.open('http://google.com')
+    github = window.open('http://github.com')
+
+    if (!google) {
+      document.querySelector('#test').innerText = 'failed'
+    }
+  }
+</script>
+
+<label id="test"></label>
+
+</body>
+</html>
