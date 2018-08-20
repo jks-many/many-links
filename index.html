@@ -6,24 +6,30 @@
 </head>
 <body>
   <script>
-    checkLinks = () => {
-      var urlParams = new URLSearchParams(location.search);
-
     const tabs = []
     const links = []
-    const indices = ['1', '2', '3', '4', '5','6','7','8','9','10']
+    
+    checkLinks = () => {
+      console.log('lalala')
+      var urlParams = new URLSearchParams(location.search);
+      const indices = ['1', '2', '3', '4', '5','6','7','8','9','10']
 
-    indices.forEach(
-      (index) => {
-        console.log(index, urlParams.get(index))
-        if (urlParams.has(index)) {
-          tabs.push(window.open(urlParams.get(index)))
-          links.push(urlParams.get(index))
+      indices.forEach(
+        (index) => {
+          console.log(index, urlParams.get(index))
+          if (urlParams.has(index)) {
+            tabs.push(window.open(urlParams.get(index), urlParams.has(index)))
+            links.push(urlParams.get(index))
+          }
         }
-      }
-    )
-
+      )
+      
+          console.log(tabs)
+    }
+    
     document.body.onload = () => {
+      checkLinks()
+
       const selector = (tabs[0] === null || tabs[0] === undefined) ? 'failure' : 'success'
 
       document.getElementById(selector).classList.remove("hide");
@@ -32,6 +38,7 @@
         (link) => {
           const a = document.createElement('a');
           a.setAttribute('href', link);
+          a.setAttribute('target', '_blank')
           a.innerHTML = link;
           document.getElementById(selector).appendChild(a);
           document.getElementById(selector).appendChild(
@@ -40,10 +47,6 @@
         }
       )
     }
-    console.log(tabs)
-    }
-    
-    checkLinks()
   </script>
 
   <style>
