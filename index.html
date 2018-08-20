@@ -1,1 +1,79 @@
-<!DOCTYPE html><html><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width"></head><body> <script>'use strict';var urlParams=new URLSearchParams(location.search);var tabs=[];var links=[];var indices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];indices.forEach(function (index){console.log(index, urlParams.get(index));if (urlParams.has(index)){tabs.push(window.open(urlParams.get(index))); links.push(urlParams.get(index));}});document.body.onload=function (){var selector=tabs[0]===null || tabs[0]===undefined ? 'failure' : 'success';document.getElementById(selector).classList.remove("hide");links.forEach(function (link){var a=document.createElement('a'); a.setAttribute('href', link); a.innerHTML=link; document.getElementById(selector).appendChild(a); document.getElementById(selector).appendChild(document.createElement('br'));});};console.log(tabs); </script> <style>main{background: white; text-align: center; margin: 0 auto; padding: 2em; font-family: Arial, Helvetica, sans-serif; font-size: 20px; color: #505050;}.hide{display: none;}</style> <main id="failure" class="hide"> 🚫 🌐 🔗<br/> Could not open multiple links <br/> You may have to allow pop-up windows for this to work<br/><br/> </main> <main id="success" class="hide"> 🎉 🌐 🔗<br/> Successfuly opened multiple links <br/> You can close this tab<br/><br/> </main></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+  <script>
+    checkLinks = () => {
+      var urlParams = new URLSearchParams(location.search);
+
+    const tabs = []
+    const links = []
+    const indices = ['1', '2', '3', '4', '5','6','7','8','9','10']
+
+    indices.forEach(
+      (index) => {
+        console.log(index, urlParams.get(index))
+        if (urlParams.has(index)) {
+          tabs.push(window.open(urlParams.get(index)))
+          links.push(urlParams.get(index))
+        }
+      }
+    )
+
+    document.body.onload = () => {
+      const selector = (tabs[0] === null || tabs[0] === undefined) ? 'failure' : 'success'
+
+      document.getElementById(selector).classList.remove("hide");
+
+      links.forEach(
+        (link) => {
+          const a = document.createElement('a');
+          a.setAttribute('href', link);
+          a.innerHTML = link;
+          document.getElementById(selector).appendChild(a);
+          document.getElementById(selector).appendChild(
+            document.createElement('br')
+          );
+        }
+      )
+    }
+    console.log(tabs)
+    }
+    
+    checkLinks()
+  </script>
+
+  <style>
+    main {
+      background: white;
+      text-align: center;
+      margin: 0 auto;
+      padding: 2em;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      color: #505050;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+
+  <main id="failure" class="hide">
+    🚫 🌐 🔗<br/>
+    Could not open multiple links <br/>
+    You may have to allow pop-up windows for this to work<br/><br/>
+    <button onclick="checkLinks()">Open links by pressing this button</button>
+    <br/><br/>
+  </main>
+
+  <main id="success" class="hide">
+    🎉 🌐 🔗<br/>
+    Successfuly opened multiple links <br/>
+    You can close this tab<br/><br/>
+  </main>
+</body>
+</html>
